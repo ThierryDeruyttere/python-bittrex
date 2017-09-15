@@ -75,11 +75,11 @@ class Bittrex(object):
     """
     Used for requesting Bittrex with API key and API secret
     """
-    def __init__(self, api_key, api_secret, limit=1, dispatch=using_requests):
+    def __init__(self, api_key, api_secret, calls_per_second=1, dispatch=using_requests):
         self.api_key = str(api_key) if api_key is not None else ''
         self.api_secret = str(api_secret) if api_secret is not None else ''
         self.dispatch = dispatch
-        self.call_rate = 1/limit
+        self.call_rate = 1.0/limit
         self.last_call = None
 
     def decrypt(self):
@@ -105,7 +105,7 @@ class Bittrex(object):
             now = time.time()
             passed = now - self.last_call
             if passed < self.call_rate:
-                # print("sleep")
+                #print("sleep")
                 time.sleep(1.0 - passed)
 
             self.last_call = time.time()
