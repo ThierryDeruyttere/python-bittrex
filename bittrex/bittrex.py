@@ -79,7 +79,7 @@ class Bittrex(object):
         self.api_key = str(api_key) if api_key is not None else ''
         self.api_secret = str(api_secret) if api_secret is not None else ''
         self.dispatch = dispatch
-        self.call_rate = 1.0/limit
+        self.call_rate = 1.0/calls_per_second
         self.last_call = None
 
     def decrypt(self):
